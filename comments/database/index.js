@@ -1,1 +1,2 @@
-export const comments = {};
+
+export const commentsDB = {};
