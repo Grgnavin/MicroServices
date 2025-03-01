@@ -5,7 +5,8 @@ export const createComments = (req, res) => {
     const commentId = randomBytes(4).toString("hex");
     const { snippetId } = req.params;
     const { content } = req.body;
- 
+    console.log(content);
+    
     const comments = commentsDB[snippetId] || [];
 
     //create comment
