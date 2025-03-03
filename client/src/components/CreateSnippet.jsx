@@ -22,7 +22,7 @@ const CreateSnippet = () => {
     useEffect(() => {
         const fetchData = async () => {
             try {
-                const res = await axios.get('http://localhost:8000/api/v1/snippets');
+                const res = await axios.get('http://localhost:8002/snippets');
                 setData(res.data);
             } catch (error) {
                 console.log(error);
@@ -30,7 +30,7 @@ const CreateSnippet = () => {
         };
         fetchData();
     }, []);
-
+    
     return (
         <div className='mt-10'>
             {/* Form to create new snippet */}
@@ -55,13 +55,13 @@ const CreateSnippet = () => {
 
             {/* Display all snippets */}
             {
-                data.snippets && Object.values(data.snippets).map((snippet) => (
+                data && Object.values(data).map((snippet) => (
                     <div key={snippet.id} className='mt-4 border p-3 rounded'>
                         <h3 className='text-lg font-bold'>{snippet.title}</h3>
                         <p>{snippet.code}</p>
 
                         {/* Comment section below the snippet */}
-                        <CreateComment snippetId={snippet.id} />
+                        <CreateComment snippet={snippet} />
                     </div>
                 ))
             }

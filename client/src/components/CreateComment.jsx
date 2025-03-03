@@ -1,13 +1,13 @@
 import axios from 'axios';
 import { useState } from 'react'
 
-const CreateComment = ({ snippetId }) => {
+const CreateComment = ({ snippet }) => {
     const[content, setContent] = useState('');
     const[comments, setComments] = useState([]);
     const AddComment = async(e) => {
         e.preventDefault();
         try {
-            const res = await axios.post(`http://localhost:8001/api/v1/snippet/${snippetId}/comment`, {content});
+            const res = await axios.post(`http://localhost:8001/api/v1/snippet/${snippet?.id}/comment`, {content});
             console.log(res.data);
             setComments([...comments, res.data.comment]);
             setContent('');
@@ -20,7 +20,7 @@ const CreateComment = ({ snippetId }) => {
     <div className='flex flex-col gap-4'>
     {/* Display all comments */}
     <ul> 
-        {comments.map((comment, index) => (
+        {snippet?.comments.map((comment, index) => (
             <li key={index} className='p-2 rounded border'>
                 {comment.content}
             </li>
@@ -44,7 +44,7 @@ const CreateComment = ({ snippetId }) => {
     </form>
 </div>
 
-  )
+)
 }
 
 export default CreateComment
